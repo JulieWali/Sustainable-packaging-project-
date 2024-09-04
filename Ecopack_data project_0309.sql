@@ -1,27 +1,26 @@
 
--- LET'S START THIS PROJECT !!!!!!
+-- LET'S START THIS PROJECT !. I am starting by cleaning the packaging database with several specifications (Product Code, Type of Packaging used, Material, Certifications of the material...)
 
 SELECT* 
 FROM ecopack_data;
 
 
--- Create duplicate table of the table ecopack_data
+-- 1. Create duplicate table (ecopack_data2) of the table ecopack_data, for safety reasons 
 
 CREATE TABLE ecopack_data2
 LIKE ecopack_data;
 SELECT* 
 FROM ecopack_data2;
 
--- Insert value of ecopack_data into ecopack_data2
 INSERT INTO ecopack_data2
 SELECT * 
 FROM ecopack_data;
 
--- Change name of the column Product_Id
+-- Update the name of the column Product_Id
 ALTER TABLE ecopack_data CHANGE ï»¿Product_Id Product_Id VARCHAR(15);
 ALTER TABLE ecopack_data2 CHANGE ï»¿Product_Id Product_Id VARCHAR(15);
 
--- 1. Remove the duplicates values, attribute a row_number first 
+-- 2. Remove the duplicates values, by firstly attributing a row_number 
 
 -- a. Spot the duplicate values first
 
@@ -33,6 +32,7 @@ SELECT *
 FROM THIS_command
 WHERE Row_num > 1;
 
+-- b. Create another duplicated table (ecopack_data3) to input values from ecopack_data2 + row number
 CREATE TABLE `ecopack_data3` (
   `Product_Id` varchar(15) DEFAULT NULL,
   `Level_of_Packaging` text,
@@ -88,6 +88,8 @@ SELECT * FROM ecopack_data3;
 SELECT * FROM ecopack_data3
 WHERE Qty_shipped = 0;
 
+-- 3. Fill out blank cells
+
 SELECT t1.Qty_shipped, t2.Qty_shipped
 FROM ecopack_data3 t2
 JOIN ecopack_data3 t1
@@ -129,3 +131,5 @@ WHERE `pourcentage_Recycled Content` IS NOT NULL;
 UPDATE ecopack_data3
 SET Certifications = 'GRS' 
 WHERE Certifications = 'grs';
+
+-- Data is cleaned and ready to be used !
