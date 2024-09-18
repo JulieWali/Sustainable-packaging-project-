@@ -1,11 +1,11 @@
 
--- LET'S START THIS PROJECT !. I am starting by cleaning the packaging database with several specifications (Product Code, Type of Packaging used, Material, Certifications of the material...)
+-- LET'S START THIS PROJECT ! I am starting by cleaning the packaging database that contains several data points (Product Code, Type of Packaging used, Material, Certifications of the material...)
 
 SELECT* 
 FROM ecopack_data;
 
 
--- 1. Create duplicate table (ecopack_data2) of the table ecopack_data, for safety reasons 
+-- 1. Creation of a duplicate table (ecopack_data2) of the table ecopack_data, for safety backup 
 
 CREATE TABLE ecopack_data2
 LIKE ecopack_data;
@@ -111,7 +111,7 @@ SELECT * FROM ecopack_data3
 where Product_Id = 'DE45789';
 
 UPDATE ecopack_data3
-	SET Qty_shipped = 50
+SET Qty_shipped = 50
 WHERE Product_Id = 'DE45789'
 AND Level_of_Packaging = 'SECONDARY' ;
 
